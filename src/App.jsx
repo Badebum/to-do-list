@@ -1,21 +1,39 @@
-import React from 'react';
-import Section from './components/Section/Section'
-import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions'
-import Notification from './components/Notification/Notification'
-import Statistics from './components/Statistics/Statistics'
+import React, { Component } from 'react';
+import TodoList from './components/TodoList';
 
-function App() {
-  return   (
-  <div>
-  <Section titel="Please leave feedback">
-<FeedbackOptions options={["good", "neutral", "bad"]} />
-  </Section>
-<Notification />
-  <Section titel="Statistics">
-<Statistics />
-  </Section>
-  </div>
-  )
+class App extends Component {
+  state = {
+    todos: [
+      { id: 'id-1', text: 'Todo 1', completed: false },
+      { id: 'id-2', text: 'Todo 2', completed: false },
+      { id: 'id-3', text: 'Todo 3', completed: true },
+      { id: 'id-4', text: 'Todo 4', completed: false },
+    ],
+  };
+
+  deleteTodo = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
+  };
+  render() {
+    const { todos } = this.state;
+
+    const totalTodoCount = todos.length;
+    const completedTodoCount = todos.reduce(
+      (total, todo) => (todo.completed ? total + 1 : total),
+      0,
+    );
+    return (
+      <>
+        <div>
+          <p>Общее количество: {totalTodoCount}</p>
+          <p>Выполнено: {completedTodoCount}</p>
+        </div>
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+      </>
+    );
+  }
 }
 
 export default App;
