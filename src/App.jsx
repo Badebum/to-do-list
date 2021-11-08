@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
+import Filter from './components/Filter/Filter';
 class App extends Component {
   state = {
     todos: [
@@ -10,6 +11,7 @@ class App extends Component {
       { id: 'id-3', text: 'Todo 3', completed: true },
       { id: 'id-4', text: 'Todo 4', completed: false },
     ],
+    filter: '',
   };
 
   addTodo = text => {
@@ -20,7 +22,7 @@ class App extends Component {
       completed: false,
     };
 
-    this.setState(({todos}) => ({
+    this.setState(({ todos }) => ({
       todos: [todo, ...todos],
     }));
   };
@@ -47,23 +49,43 @@ class App extends Component {
     }));
   };
 
-  render() {
+  chengeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  getVisibleTodos = () => {
+    const { todos, filter } = this.state;
+    const normFilter = filter.toLocaleLowerCase();
+    return todos.filter(todo =>
+      todo.text.toLocaleLowerCase().includes(normFilter),
+    );
+  };
+
+  getCalcComplitedTodo = () => {
     const { todos } = this.state;
 
-    const totalTodoCount = todos.length;
-    const completedTodoCount = todos.reduce(
+    return todos.reduce(
       (total, todo) => (todo.completed ? total + 1 : total),
       0,
     );
+  };
+
+  render() {
+    const { todos, filter } = this.state;
+    const completedTodoCount = this.getCalcComplitedTodo();
+    const visibleTodos = this.getVisibleTodos();
+
     return (
       <>
         <TodoEditor onSubmit={this.addTodo} />
         <div>
-          <p>Общее количество: {totalTodoCount}</p>
+          <p>Общее количество: {todos.length}</p>
           <p>Выполнено: {completedTodoCount}</p>
         </div>
+
+        <Filter value={filter} onChange={this.chengeFilter} />
         <TodoList
-          todos={todos}
+          todos={visibleTodos}
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
