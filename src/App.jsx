@@ -14,6 +14,10 @@ class App extends Component {
     filter: '',
   };
 
+//   componentDidUpdate(prevProps, PrevState) {
+//   if(this.state.todos !== prevState.todos)
+// }
+
   addTodo = text => {
     console.log(text);
     const todo = {
