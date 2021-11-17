@@ -5,4 +5,11 @@
 .list {
   list-style: none;
   display: flex;
+  justify-content: space-evenly;
+}
+
+.items {
+  border: 1px solid black;
+  max-width: 200px;
+  min-width: 100px;
 }

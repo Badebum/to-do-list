@@ -1,5 +1,8 @@
 .input {
   border-radius: 10px;
   margin-left: 5px;
-  border-style: none;
+}
+
+.searchImput {
+  border: 1px solid black;
 }

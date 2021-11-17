@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './TodoEditor.module.css';
 
 class TodoEditor extends Component {
   state = {
@@ -18,7 +19,7 @@ class TodoEditor extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={styles.subForm}>
         <textarea
           value={this.state.message}
           onChange={this.handleChange}

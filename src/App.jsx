@@ -3,6 +3,8 @@ import shortid from 'shortid';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
 import Filter from './components/Filter/Filter';
+import styles from './App.module.css';
+
 class App extends Component {
   state = {
     todos: [
@@ -14,9 +16,9 @@ class App extends Component {
     filter: '',
   };
 
-//   componentDidUpdate(prevProps, PrevState) {
-//   if(this.state.todos !== prevState.todos)
-// }
+  //   componentDidUpdate(prevProps, PrevState) {
+  //   if(this.state.todos !== prevState.todos)
+  // }
 
   addTodo = text => {
     console.log(text);
@@ -81,18 +83,20 @@ class App extends Component {
 
     return (
       <>
-        <TodoEditor onSubmit={this.addTodo} />
-        <div>
-          <p>Общее количество: {todos.length}</p>
-          <p>Выполнено: {completedTodoCount}</p>
-        </div>
+        <div className={styles.container}>
+          <TodoEditor onSubmit={this.addTodo} />
+          <div>
+            <p>Общее количество: {todos.length}</p>
+            <p>Выполнено: {completedTodoCount}</p>
+          </div>
 
-        <Filter value={filter} onChange={this.chengeFilter} />
-        <TodoList
-          todos={visibleTodos}
-          onDeleteTodo={this.deleteTodo}
-          onToggleCompleted={this.toggleCompleted}
-        />
+          <Filter value={filter} onChange={this.chengeFilter} />
+          <TodoList
+            todos={visibleTodos}
+            onDeleteTodo={this.deleteTodo}
+            onToggleCompleted={this.toggleCompleted}
+          />
+        </div>
       </>
     );
   }
