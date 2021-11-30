@@ -7,18 +7,9 @@ import styles from './App.module.css';
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 'id-1', text: 'Todo 1', completed: false },
-      { id: 'id-2', text: 'Todo 2', completed: false },
-      { id: 'id-3', text: 'Todo 3', completed: true },
-      { id: 'id-4', text: 'Todo 4', completed: false },
-    ],
+    todos: [],
     filter: '',
   };
-
-  //   componentDidUpdate(prevProps, PrevState) {
-  //   if(this.state.todos !== prevState.todos)
-  // }
 
   addTodo = text => {
     console.log(text);
