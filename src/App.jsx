@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import TodoList from './components/TodoList';
+import TodoList from './components/TodoList/TodoList';
 import TodoEditor from './components/TodoEditor';
 import Filter from './components/Filter/Filter';
 import styles from './App.module.css';
+import Modal from './components/Modal';
 
 class App extends Component {
   state = {
     todos: [],
     filter: '',
+    showModal: false,
+  };
+
+  componentDidMount() {
+    const todos = JSON.parse(localStorage.getItem('todos'));
+    if (todos) {
+      this.setState({ todos: todos });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.todos !== prevState.todos) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
   addTodo = text => {
-    console.log(text);
     const todo = {
       id: shortid.generate(),
       text,
@@ -34,7 +54,6 @@ class App extends Component {
     this.setState(prevState => ({
       todos: prevState.todos.map(todo => {
         if (todo.id === todoId) {
-          console.log('пиши тодо');
           return {
             ...todo,
             completed: !todo.completed,
@@ -68,12 +87,19 @@ class App extends Component {
   };
 
   render() {
-    const { todos, filter } = this.state;
+    const { todos, filter, showModal } = this.state;
     const completedTodoCount = this.getCalcComplitedTodo();
     const visibleTodos = this.getVisibleTodos();
 
     return (
       <>
+        {showModal && (
+          <Modal>
+            {' '}
+            <h1>Modal</h1>
+          </Modal>
+        )}
+
         <div className={styles.container}>
           <TodoEditor onSubmit={this.addTodo} />
           <div>

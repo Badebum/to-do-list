@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { composeWitchDevTools } from 'redux-devtools-extension';
 
-const reducer = (state = { x: 5 }, action) => {
+const reducer = (state = {}, action) => {
   console.log(action);
   return state;
 };
