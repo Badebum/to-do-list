@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import TodoList from './components/TodoList/TodoList';
+import TodoList from './components/TodoList/TodoList';
 import TodoEditor from './components/TodoEditor';
-// import Filter from './components/Filter/Filter';
+import Filter from './components/Filter/Filter';
 import styles from './App.module.css';
 import Modal from './components/Modal';
 import IconButton from './components/IconButton';
@@ -43,11 +43,11 @@ class App extends Component {
   //   }));
   // };
 
-  deleteTodo = todoId => {
-    this.setState(prevState => ({
-      todos: prevState.todos.filter(todo => todo.id !== todoId),
-    }));
-  };
+  // deleteTodo = todoId => {
+  //   this.setState(prevState => ({
+  //     todos: prevState.todos.filter(todo => todo.id !== todoId),
+  //   }));
+  // };
 
   toggleCompleted = todoId => {
     this.setState(prevState => ({
@@ -64,16 +64,8 @@ class App extends Component {
     }));
   };
 
-  changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
-  };
-
-  // getVisibleTodos = () => {
-  //   const { todos, filter } = this.state;
-  //   const normFilter = filter.toLocaleLowerCase();
-  //   return todos.filter(todo =>
-  //     todo.text.toLocaleLowerCase().includes(normFilter),
-  //   );
+  // changeFilter = e => {
+  //   this.setState({ filter: e.currentTarget.value });
   // };
 
   // getCalcComplitedTodo = () => {
@@ -112,12 +104,8 @@ class App extends Component {
             <p>Выполнено: {completedTodoCount}</p>
           </div> */}
 
-          {/* <Filter value={filter} onChange={this.changeFilter} /> */}
-          {/* <TodoList
-            todos={visibleTodos}
-            onDeleteTodo={this.deleteTodo}
-            onToggleCompleted={this.toggleCompleted}
-          /> */}
+          <Filter />
+          <TodoList />
         </div>
       </>
     );

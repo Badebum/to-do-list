@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './TodoList.module.css';
 import Todo from '../Todo/Todo';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/todos/todos-actions';
 
 const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
   <ul className={styles.list}>
@@ -17,4 +19,13 @@ const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
   </ul>
 );
 
-export default TodoList;
+const mapStateTodispatch = state => ({
+  todos: state.todos.items,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDeleteTodo: id => dispatch(actions.deleteTodo(id)),
+  onToggleCompleted: () => null,
+});
+
+export default connect(mapStateTodispatch, mapDispatchToProps)(TodoList);

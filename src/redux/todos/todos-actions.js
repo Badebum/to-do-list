@@ -9,3 +9,13 @@ export const addTodo = text => ({
     completed: false,
   },
 });
+
+export const deleteTodo = todoId => ({
+  type: types.DELETE,
+  payload: todoId,
+});
+
+export const changeFilter = value => ({
+  type: types.CHANGE_FILTER,
+  payload: value,
+});
