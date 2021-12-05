@@ -1,0 +1,14 @@
+.iconButton {
+  margin: 0;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font: inherit;
+  background-color: #2323f1;
+  cursor: pointer;
+
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+}

@@ -5,6 +5,8 @@ import TodoEditor from './components/TodoEditor';
 import Filter from './components/Filter/Filter';
 import styles from './App.module.css';
 import Modal from './components/Modal';
+import IconButton from './components/IconButton';
+import { ReactComponent as Cross } from './icons/close.svg';
 
 class App extends Component {
   state = {
@@ -93,9 +95,17 @@ class App extends Component {
 
     return (
       <>
+        <IconButton onClick={this.toggleModal} aria-label="открытие модалки">
+          <Cross />
+        </IconButton>
+        {/* <button type="button" onClick={this.toggleModal}>
+          Open Modal
+        </button> */}
         {showModal && (
-          <Modal>
-            {' '}
+          <Modal onClose={this.toggleModal}>
+            <button type="button" onClick={this.toggleModal}>
+              Close modal
+            </button>
             <h1>Modal</h1>
           </Modal>
         )}
