@@ -6,7 +6,7 @@ import styles from './App.module.css';
 import Modal from './components/Modal';
 import IconButton from './components/IconButton';
 import { ReactComponent as Cross } from './icons/close.svg';
-import { Stats } from 'webpack';
+import Statistic from './components/Statistic/Statistic';
 
 class App extends Component {
   state = {
@@ -32,43 +32,6 @@ class App extends Component {
     }));
   };
 
-  // addTodo = text => {
-  //   const todo = {
-  //     id: shortid.generate(),
-  //     text,
-  //     completed: false,
-  //   };
-
-  //   this.setState(({ todos }) => ({
-  //     todos: [todo, ...todos],
-  //   }));
-  // };
-
-  // deleteTodo = todoId => {
-  //   this.setState(prevState => ({
-  //     todos: prevState.todos.filter(todo => todo.id !== todoId),
-  //   }));
-  // };
-
-  // toggleCompleted = todoId => {
-  //   this.setState(prevState => ({
-  //     todos: prevState.todos.map(todo => {
-  //       if (todo.id === todoId) {
-  //         return {
-  //           ...todo,
-  //           completed: !todo.completed,
-  //         };
-  //       }
-
-  //       return todo;
-  //     }),
-  //   }));
-  // };
-
-  // changeFilter = e => {
-  //   this.setState({ filter: e.currentTarget.value });
-  // };
-
   render() {
     const { showModal } = this.state;
 
@@ -80,16 +43,13 @@ class App extends Component {
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <button type="button" onClick={this.toggleModal}>
-              Close modal
-            </button>
-            <h1>Modal</h1>
+            <button type="button" onClick={this.toggleModal}></button>
+            <TodoEditor onSave={this.toggleModal} />
           </Modal>
         )}
 
         <div className={styles.container}>
-          <TodoEditor />
-          <Stats />
+          <Statistic />
           <Filter />
           <TodoList />
         </div>
