@@ -13,19 +13,6 @@ class App extends Component {
     showModal: false,
   };
 
-  // componentDidMount() {
-  //   const todos = JSON.parse(localStorage.getItem('todos'));
-  //   if (todos) {
-  //     this.setState({ todos: todos });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.todos !== prevState.todos) {
-  //     localStorage.setItem('todos', JSON.stringify(this.state.todos));
-  //   }
-  // }
-
   toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
