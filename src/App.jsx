@@ -6,6 +6,7 @@ import styles from './App.module.css';
 import Modal from './components/Modal';
 import IconButton from './components/IconButton';
 import { ReactComponent as Cross } from './icons/close.svg';
+import { Stats } from 'webpack';
 
 class App extends Component {
   state = {
@@ -49,38 +50,27 @@ class App extends Component {
   //   }));
   // };
 
-  toggleCompleted = todoId => {
-    this.setState(prevState => ({
-      todos: prevState.todos.map(todo => {
-        if (todo.id === todoId) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
+  // toggleCompleted = todoId => {
+  //   this.setState(prevState => ({
+  //     todos: prevState.todos.map(todo => {
+  //       if (todo.id === todoId) {
+  //         return {
+  //           ...todo,
+  //           completed: !todo.completed,
+  //         };
+  //       }
 
-        return todo;
-      }),
-    }));
-  };
+  //       return todo;
+  //     }),
+  //   }));
+  // };
 
   // changeFilter = e => {
   //   this.setState({ filter: e.currentTarget.value });
   // };
 
-  // getCalcComplitedTodo = () => {
-  //   const { todos } = this.state;
-
-  //   return todos.reduce(
-  //     (total, todo) => (todo.completed ? total + 1 : total),
-  //     0,
-  //   );
-  // };
-
   render() {
     const { showModal } = this.state;
-    // const completedTodoCount = this.getCalcComplitedTodo();
-    // const visibleTodos = this.getVisibleTodos();
 
     return (
       <>
@@ -99,11 +89,7 @@ class App extends Component {
 
         <div className={styles.container}>
           <TodoEditor />
-          {/* <div>
-            <p>Общее количество: {todos.length}</p>
-            <p>Выполнено: {completedTodoCount}</p>
-          </div> */}
-
+          <Stats />
           <Filter />
           <TodoList />
         </div>
