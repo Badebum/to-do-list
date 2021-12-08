@@ -7,11 +7,17 @@ import Modal from './components/Modal';
 import IconButton from './components/IconButton';
 import { ReactComponent as Cross } from './icons/close.svg';
 import Statistic from './components/Statistic/Statistic';
+import { connect } from 'react-redux';
+import { fetchTodos } from './redux/todos/todos.oparations';
 
 class App extends Component {
   state = {
     showModal: false,
   };
+
+  componentDidMount() {
+    this.props.fetchTodos();
+  }
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({
@@ -45,4 +51,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  fetchTodos: () => dispatch(fetchTodos()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

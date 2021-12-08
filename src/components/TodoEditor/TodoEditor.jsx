@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './TodoEditor.module.css';
-import * as todosActions from '../../redux/todos/todos-actions';
+import * as todosOparations from '../../redux/todos/todos.oparations';
 
 class TodoEditor extends Component {
   state = {
@@ -22,7 +22,7 @@ class TodoEditor extends Component {
       return;
     }
 
-    alert('введите заметку')
+    alert('введите заметку');
   };
 
   render() {
@@ -39,7 +39,7 @@ class TodoEditor extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: text => dispatch(todosActions.addTodo(text)),
+  onSubmit: text => dispatch(todosOparations.addTodo(text)),
 });
 
 export default connect(null, mapDispatchToProps)(TodoEditor);

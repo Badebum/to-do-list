@@ -3,13 +3,27 @@ import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './todos-actions';
 
 const items = createReducer([], {
-  [actions.addTodo]: (state, { payload }) => [...state, payload],
-  [actions.deleteTodo]: (state, { payload }) =>
+  [actions.fetchTodoSuccess]: (_, { payload }) => payload,
+  [actions.addTodoSuccess]: (state, { payload }) => [...state, payload],
+  [actions.deleteTodoSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-  [actions.toggleCompleted]: (state, { payload }) =>
-    state.map(todo =>
-      todo.id === payload ? { ...todo, completed: !todo.completed } : todo,
-    ),
+  [actions.toggleCompletedSuccess]: (state, { payload }) =>
+    state.map(todo => (todo.id === payload.id ? payload : todo)),
+});
+
+const loading = createReducer(false, {
+  [actions.addTodoRequest]: () => true,
+  [actions.addTodoSuccess]: () => false,
+  [actions.addTodoError]: () => false,
+  [actions.deleteTodoRequest]: () => true,
+  [actions.deleteTodoSuccess]: () => false,
+  [actions.deleteTodoError]: () => false,
+  [actions.toggleCompletedRequest]: () => true,
+  [actions.toggleCompletedSuccess]: () => false,
+  [actions.toggleCompletedError]: () => false,
+  [actions.fetchTodoRequest]: () => true,
+  [actions.fetchTodoSuccess]: () => false,
+  [actions.fetchTodoError]: () => false,
 });
 
 const filter = createReducer('', {
@@ -19,4 +33,5 @@ const filter = createReducer('', {
 export default combineReducers({
   items,
   filter,
+  loading,
 });
