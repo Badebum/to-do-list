@@ -43,7 +43,7 @@ export const deleteTodo = id => dispatch => {
 
   axios
     .delete(`/todo/${id}`)
-    .then(({ todoId }) => dispatch(deleteTodoSuccess(todoId)))
+    .then(() => dispatch(deleteTodoSuccess(id)))
     .catch(error => dispatch(deleteTodoError(error)));
 };
 

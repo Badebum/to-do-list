@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Filter.module.css';
 import * as actions from '../../redux/todos/todos-actions';
+import { getFilter } from '../../redux/todos/todos-selector';
 
 const Filter = ({ value, onChange }) => {
   return (
@@ -21,16 +22,8 @@ const Filter = ({ value, onChange }) => {
   );
 };
 
-const getVisibleTodos = (allTodos, filter) => {
-  const normFilter = filter.toLocaleLowerCase();
-
-  return allTodos.filter(({ text }) =>
-    text.toLocaleLowerCase().includes(normFilter),
-  );
-};
-
-const mapStateToProps = ({ todos: { items, filter } }) => ({
-  todos: getVisibleTodos(items, filter),
+const mapStateToProps = state => ({
+  filter: getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({

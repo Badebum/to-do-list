@@ -9,6 +9,7 @@ import { ReactComponent as Cross } from './icons/close.svg';
 import Statistic from './components/Statistic/Statistic';
 import { connect } from 'react-redux';
 import { fetchTodos } from './redux/todos/todos.oparations';
+import { getLoading } from './redux/todos/todos-selector';
 
 class App extends Component {
   state = {
@@ -42,8 +43,11 @@ class App extends Component {
         )}
 
         <div className={styles.container}>
+          {this.props.isLoadingTodos && <h1>Loading...</h1>}
+
           <Statistic />
           <Filter />
+
           <TodoList />
         </div>
       </>
@@ -51,8 +55,12 @@ class App extends Component {
   }
 }
 
+const mapStateToPromps = state => ({
+  isLoadingTodos: getLoading(state),
+});
+
 const mapDispatchToProps = dispatch => ({
   fetchTodos: () => dispatch(fetchTodos()),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToPromps, mapDispatchToProps)(App);

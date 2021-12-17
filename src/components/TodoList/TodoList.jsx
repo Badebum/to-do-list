@@ -3,6 +3,7 @@ import styles from './TodoList.module.css';
 import Todo from '../Todo/Todo';
 import { connect } from 'react-redux';
 import * as operations from '../../redux/todos/todos.oparations';
+import { getVisibleTodos } from '../../redux/todos/todos-selector';
 
 const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
   <ul className={styles.list}>
@@ -22,7 +23,7 @@ const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
 );
 
 const mapStateTodispatch = state => ({
-  todos: state.todos.items,
+  todos: getVisibleTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({
